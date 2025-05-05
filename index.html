@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Słówka – Egzamin 8-klasisty</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+      background-color: #f0f0f0;
+    }
+    h1 {
+      font-size: 24px;
+    }
+    .button {
+      margin: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      width: 300px;
+      cursor: pointer;
+    }
+    .word {
+      font-size: 24px;
+      margin: 20px 0;
+    }
+    .answer-button {
+      margin: 5px;
+      padding: 10px;
+      font-size: 16px;
+      width: 60%;
+    }
+    .result {
+      font-size: 18px;
+      margin-top: 15px;
+      height: 24px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Wybierz stronę:</h1>
+  <div id="menu"></div>
+  <div id="game" style="display:none;">
+    <div class="word" id="question"></div>
+    <div id="answers"></div>
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    const wordSets = {
+      "pp. 4–5": [
+        ["answer the phone", "odbierać telefon"],
+        ["arrive", "przyjeżdżać"],
+        ["check emails", "sprawdzać e-maile"],
+        ["classroom", "klasa (pomieszczenie)"]
+      ],
+      "pp. 12–13": [
+        ["acting", "gra aktorska"],
+        ["actor", "aktor"],
+        ["band", "zespół"]
+      ],
+      "pp. 44–45": [
+        ["bored", "znudzony"],
+        ["busy", "zajęty"],
+        ["calm", "spokojny"]
+      ]
+    };
+
+    let currentSet = [];
+    let currentIndex = 0;
+    let currentQuestion = null;
+    let score = 0;
+
+    const menuDiv = document.getElementById('menu');
+    const gameDiv = document.getElementById('game');
+    const questionDiv = document.getElementById('question');
+    const answersDiv = document.getElementById('answers');
+    const resultDiv = document.getElementById('result');
+
+    function shuffle(array) {
+      return array.sort(() => Math.random() - 0.5);
+    }
+
+    function startGame(setName) {
+      currentSet = shuffle([...wordSets[setName]]);
+      currentIndex = 0;
+      score = 0;
+      menuDiv.style.display = "none";
+      gameDiv.style.display = "block";
+      showNextWord();
+    }
+
+    function showNextWord() {
+      if (currentIndex >= currentSet.length) {
+        questionDiv.textContent = `Koniec gry! Twój wynik: ${score}/${currentSet.length}`;
+        answersDiv.innerHTML = '';
+        return;
+      }
+
+      currentQuestion = currentSet[currentIndex];
+      questionDiv.textContent = currentQuestion[0];
+
+      const options = [currentQuestion[1]];
+      while (options.length < 3) {
+        const random = wordSets[Object.keys(wordSets)[0]];
+        const candidate = random[Math.floor(Math.random() * random.length)][1];
+        if (!options.includes(candidate)) {
+          options.push(candidate);
+        }
+      }
+
+      shuffle(options);
+
+      answersDiv.innerHTML = '';
+      options.forEach((opt, index) => {
+        const btn = document.createElement("button");
+        btn.className = "answer-button";
+        btn.textContent = opt;
+        btn.onclick = () => checkAnswer(opt);
+        answersDiv.appendChild(btn);
+      });
+
+      resultDiv.textContent = '';
+    }
+
+    function checkAnswer(selected) {
+      if (selected === currentQuestion[1]) {
+        score++;
+        resultDiv.textContent = "✅ Dobrze!";
+        resultDiv.style.color = "green";
+      } else {
+        resultDiv.textContent = `❌ Źle! Poprawna odpowiedź: ${currentQuestion[1]}`;
+        resultDiv.style.color = "red";
+      }
+      currentIndex++;
+      setTimeout(showNextWord, 1000);
+    }
+
+    Object.keys(wordSets).forEach(setName => {
+      const btn = document.createElement("button");
+      btn.textContent = setName;
+      btn.className = "button";
+      btn.onclick = () => startGame(setName);
+      menuDiv.appendChild(btn);
+    });
+  </script>
+
+</body>
+</html>
