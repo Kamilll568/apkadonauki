@@ -161,7 +161,7 @@
     }
 
     function startGame(setName) {
-      currentSet = shuffle([...wordSets[setName]]);
+      currentSet = shuffle(wordSets[setName]);
       currentIndex = 0;
       score = 0;
       menuDiv.style.display = "none";
@@ -237,3 +237,4 @@
   </script>
 </body>
 </html>
+
