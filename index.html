@@ -159,6 +159,83 @@
         ["read", "czytać"],
         ["review", "recenzja"],
         ["critic", "krytyk"]
+      ],
+      "pp. 6–7": [
+        ["actor", "aktor"],
+        ["artist", "artysta"],
+        ["audition", "przesłuchanie"],
+        ["band", "zespół muzyczny"],
+        ["book", "książka"],
+        ["camera", "kamera"],
+        ["celebrity", "celebryta"],
+        ["character", "postać"],
+        ["clothes", "ubrania"],
+        ["concert", "koncert"],
+        ["dancer", "tancerz"],
+        ["director", "reżyser"],
+        ["entertainment", "rozrywka"],
+        ["film star", "gwiazda filmowa"],
+        ["gallery", "galeria sztuki"],
+        ["gig", "występ"],
+        ["guitarist", "gitarzysta"],
+        ["interview", "wywiad"],
+        ["live performance", "występ na żywo"],
+        ["make-up", "makijaż"],
+        ["musician", "muzyk"],
+        ["orchestra", "orkiestra"],
+        ["paint", "malować"],
+        ["painting", "obraz"],
+        ["performance", "występ"],
+        ["piano", "fortepian"],
+        ["radio", "radio"],
+        ["show", "program"],
+        ["singer", "wokalista"],
+        ["stage", "scena"],
+        ["studio", "studio"],
+        ["theater", "teatr"],
+        ["track", "utwór"],
+        ["video clip", "teledysk"]
+      ],
+      "pp. 14–15": [
+        ["adventure", "przygoda"],
+        ["ballet", "balet"],
+        ["comedy", "komedia"],
+        ["drama", "dramat"],
+        ["fame", "sława"],
+        ["fantasy", "fantasy"],
+        ["horror", "horror"],
+        ["musical", "musical"],
+        ["romance", "romans"],
+        ["show", "show"],
+        ["thriller", "thriller"],
+        ["tragedy", "tragedia"],
+        ["western", "western"],
+        ["audience", "publiczność"],
+        ["director", "reżyser"],
+        ["film", "film"],
+        ["film industry", "przemysł filmowy"],
+        ["viewer", "widz"],
+        ["watch", "oglądać"],
+        ["comedy", "komedia"],
+        ["action", "akcja"]
+      ],
+      "pp. 16–17": [
+        ["agreement", "umowa"],
+        ["applicant", "aplikant"],
+        ["apply", "ubiegać się o"],
+        ["candidate", "kandydat"],
+        ["CV", "CV"],
+        ["education", "edukacja"],
+        ["employer", "pracodawca"],
+        ["employee", "pracownik"],
+        ["interview", "rozmowa kwalifikacyjna"],
+        ["job", "praca"],
+        ["job offer", "oferta pracy"],
+        ["job application", "podanie o pracę"],
+        ["profession", "zawód"],
+        ["qualifications", "kwalifikacje"],
+        ["salary", "pensja"],
+        ["work experience", "doświadczenie zawodowe"]
       ]
     };
 
@@ -200,13 +277,10 @@
         }
       }
 
-      // Wyświetlanie tylko pierwszych liter słów
-      const firstLetterOptions = options.map(option => option[0] + '.');
-      
-      shuffle(firstLetterOptions);
+      shuffle(options);
 
       document.getElementById("answers").innerHTML = '';
-      firstLetterOptions.forEach(opt => {
+      options.forEach(opt => {
         const btn = document.createElement("button");
         btn.className = "answer-button";
         btn.textContent = opt;
@@ -227,9 +301,7 @@
 
     function checkAnswer(selectedAnswer) {
       const currentQuestion = currentSet[currentIndex - 1];
-      const correctAnswerFirstLetter = currentQuestion[1][0] + '.';
-      
-      if (selectedAnswer === correctAnswerFirstLetter) {
+      if (selectedAnswer === currentQuestion[1]) {
         score++;
         document.getElementById("result").textContent = "Dobra odpowiedź!";
       } else {
