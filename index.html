@@ -287,101 +287,100 @@
         ("get married", "pobrać się"),
         ("be born", "urodzić się"),
         ("retire", "przejść na emeryturę"),
-        ("get a job", "dostać pracę"),
-        ("get a driving licence", "zrobić prawo jazdy"),
-        ("go to school", "chodzić do szkoły"),
-        ("have a baby", "mieć dziecko"),
-        ("fall in love", "zakochać się"),
-        ("free time", "czas wolny"),
-        ("go out", "wychodzić (np. do kina)"),
-        ("hang out with friends", "spędzać czas z przyjaciółmi"),
-        ("relax", "relaksować się"),
-        ("spend time outdoors", "spędzać czas na dworze"),
-        ("watch TV", "oglądać telewizję")
+        ("get divorced", "rozwieść się"),
+        ("get engaged", "zaręczyć się"),
+        ("be single", "być singlem"),
+        ("raise", "wychowywać")
     ]
-    let currentSet = [];
-    let currentIndex = 0;
-    let currentQuestion = null;
-    let score = 0;
+};
 
-    const menuDiv = document.getElementById('menu');
-    const gameDiv = document.getElementById('game');
-    const questionDiv = document.getElementById('question');
-    const answersDiv = document.getElementById('answers');
-    const resultDiv = document.getElementById('result');
+let currentSet = [];
+let currentIndex = 0;
+let score = 0;
 
-    function shuffle(array) {
-      return array.sort(() => Math.random() - 0.5);
+function selectSet(setName) {
+  currentSet = wordSets[setName];
+  currentIndex = 0;
+  score = 0;
+  document.getElementById("menu").style.display = "none";
+  document.getElementById("game").style.display = "block";
+  showNextWord();
+}
+
+function backToMenu() {
+  document.getElementById("menu").style.display = "block";
+  document.getElementById("game").style.display = "none";
+}
+
+function showNextWord() {
+  if (currentIndex >= currentSet.length) {
+    document.getElementById("question").textContent = `Koniec gry! Twój wynik: ${score}/${currentSet.length}`;
+    document.getElementById("answers").innerHTML = '';
+    return;
+  }
+
+  const currentQuestion = currentSet[currentIndex];
+  document.getElementById("question").textContent = currentQuestion[0];
+
+  const options = [currentQuestion[1]];
+
+  // Zbieramy odpowiedzi z różnych kategorii
+  while (options.length < 5) {
+    const randomSet = wordSets[Object.keys(wordSets)[Math.floor(Math.random() * Object.keys(wordSets).length)]];
+    const randomQuestion = randomSet[Math.floor(Math.random() * randomSet.length)][1];
+    if (!options.includes(randomQuestion)) {
+      options.push(randomQuestion);
     }
+  }
 
-    function startGame(setName) {
-      currentSet = shuffle([...wordSets[setName]]);
-      currentIndex = 0;
-      score = 0;
-      menuDiv.style.display = "none";
-      gameDiv.style.display = "block";
-      showNextWord();
-    }
+  shuffle(options);
 
-    function showNextWord() {
-      if (currentIndex >= currentSet.length) {
-        questionDiv.textContent = `Koniec gry! Twój wynik: ${score}/${currentSet.length}`;
-        answersDiv.innerHTML = '';
-        return;
-      }
+  document.getElementById("answers").innerHTML = '';
+  options.forEach(opt => {
+    const btn = document.createElement("button");
+    btn.className = "answer-button";
+    btn.textContent = opt;
+    btn.onclick = () => checkAnswer(opt);
+    document.getElementById("answers").appendChild(btn);
+  });
 
-      currentQuestion = currentSet[currentIndex];
-      questionDiv.textContent = currentQuestion[0];
+  document.getElementById("result").textContent = '';
+  currentIndex++;
+}
 
-      const options = [currentQuestion[1]];
-      while (options.length < 3) {
-        const random = wordSets[Object.keys(wordSets)[0]];
-        const candidate = random[Math.floor(Math.random() * random.length)][1];
-        if (!options.includes(candidate)) {
-          options.push(candidate);
-        }
-      }
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
 
-      shuffle(options);
+function checkAnswer(selectedAnswer) {
+  const currentQuestion = currentSet[currentIndex - 1];
+  if (selectedAnswer === currentQuestion[1]) {
+    score++;
+    document.getElementById("result").textContent = "Dobra odpowiedź!";
+  } else {
+    document.getElementById("result").textContent = "Zła odpowiedź!";
+  }
+  setTimeout(showNextWord, 1000);
+}
 
-      answersDiv.innerHTML = '';
-      options.forEach((opt, index) => {
-        const btn = document.createElement("button");
-        btn.className = "answer-button";
-        btn.textContent = opt;
-        btn.onclick = () => checkAnswer(opt);
-        answersDiv.appendChild(btn);
-      });
+// Wyświetl menu wyboru zestawów
+function displayMenu() {
+  const menu = document.getElementById("menu");
+  menu.innerHTML = '<h2>Wybierz kategorię:</h2>';
+  Object.keys(wordSets).forEach(setName => {
+    const button = document.createElement("button");
+    button.className = "button";
+    button.textContent = setName;
+    button.onclick = () => selectSet(setName);
+    menu.appendChild(button);
+  });
+}
 
-      resultDiv.textContent = '';
-    }
-
-    function checkAnswer(selected) {
-      if (selected === currentQuestion[1]) {
-        score++;
-        resultDiv.textContent = "✅ Dobrze!";
-        resultDiv.style.color = "green";
-      } else {
-        resultDiv.textContent = `❌ Źle! Poprawna odpowiedź: ${currentQuestion[1]}`;
-        resultDiv.style.color = "red";
-      }
-      currentIndex++;
-      setTimeout(showNextWord, 1000);
-    }
-
-    function backToMenu() {
-      menuDiv.style.display = "block";
-      gameDiv.style.display = "none";
-    }
-
-    Object.keys(wordSets).forEach(setName => {
-      const btn = document.createElement("button");
-      btn.className = "button";
-      btn.textContent = setName;
-      btn.onclick = () => startGame(setName);
-      menuDiv.appendChild(btn);
-    });
-  </script>
+displayMenu();
+</script>
 
 </body>
 </html>
