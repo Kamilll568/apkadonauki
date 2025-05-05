@@ -58,7 +58,7 @@
 
   <script>
     const wordSets = {
-     "pp. 4–5": [
+      "pp. 4–5": [
         ("answer the phone", "odbierać telefon"),
         ("arrive", "przyjeżdżać"),
         ("check emails", "sprawdzać e-maile"),
@@ -103,8 +103,8 @@
         ("walk to school", "iść pieszo do szkoły"),
         ("walk to work", "iść pieszo do pracy"),
         ("work", "pracować")
-    ],
-    "pp. 12–13": [
+      ],
+      "pp. 12–13": [
         ("acting", "gra aktorska"),
         ("actor", "aktor"),
         ("band", "zespół"),
@@ -159,228 +159,97 @@
         ("read", "czytać"),
         ("review", "recenzja"),
         ("critic", "krytyk")
-    ],
-    "pp. 44–45": [
-        ("bored", "znudzony"),
-        ("busy", "zajęty"),
-        ("calm", "spokojny"),
-        ("cold", "zimno"),
-        ("excited", "podekscytowany"),
-        ("friendly", "przyjazny"),
-        ("happy", "szczęśliwy"),
-        ("hot", "gorąco"),
-        ("hungry", "głodny"),
-        ("kind", "uprzejmy"),
-        ("lazy", "leniwy"),
-        ("lonely", "samotny"),
-        ("nervous", "zdenerwowany"),
-        ("polite", "grzeczny"),
-        ("quiet", "cichy"),
-        ("rude", "niegrzeczny"),
-        ("sad", "smutny"),
-        ("selfish", "samolubny"),
-        ("shy", "nieśmiały"),
-        ("sociable", "towarzyski"),
-        ("talkative", "rozmowny"),
-        ("tired", "zmęczony"),
-        ("unfriendly", "nieprzyjazny"),
-        ("unhappy", "nieszczęśliwy"),
-        ("warm", "ciepło"),
-        ("well-behaved", "dobrze wychowany")
-    ],
-    "pp. 50–51": [
-        ("type", "pisać (na komputerze)"),
-        ("virus", "wirus"),
-        ("volume", "głośność"),
-        ("Wi-Fi", "Wi-Fi"),
-        ("browser", "przeglądarka"),
-        ("camera", "kamera"),
-        ("chat", "rozmawiać przez internet"),
-        ("click", "kliknąć"),
-        ("delete", "usunąć"),
-        ("digital camera", "aparat cyfrowy"),
-        ("download", "ściągać (plik)"),
-        ("DVD player", "odtwarzacz DVD"),
-        ("earphones", "słuchawki douszne"),
-        ("file", "plik"),
-        ("games console", "konsola gier"),
-        ("handset", "telefon"),
-        ("headphones", "słuchawki nauszne"),
-        ("keyboard", "klawiatura"),
-        ("listen to music/podcasts", "słuchać muzyki/podcastu"),
-        ("memory/USB stick", "pendrive"),
-        ("microphone", "mikrofon"),
-        ("monitor/screen", "monitor/ekran"),
-        ("mouse", "mysz"),
-        ("phone", "telefon"),
-        ("plug in", "podłączyć"),
-        ("post", "zamieszczać post"),
-        ("print", "drukować"),
-        ("printer", "drukarka"),
-        ("protect", "chronić"),
-        ("remote control", "pilot"),
-        ("router", "router"),
-        ("scanner", "skaner"),
-        ("selfie stick", "kijek do selfie"),
-        ("signal", "sygnał"),
-        ("SMS", "wiadomość tekstowa"),
-        ("software", "oprogramowanie"),
-        ("speaker", "głośnik"),
-        ("tablet", "tablet"),
-        ("take a selfie", "zrobić selfie"),
-        ("web designer", "twórca stron internetowych"),
-        ("blogger", "bloger"),
-        ("hacker", "haker"),
-        ("moderator", "moderator"),
-        ("programmer", "programista"),
-        ("troll", "osoba umieszczająca złośliwe wpisy"),
-        ("carry out research", "prowadzić badania"),
-        ("find a solution", "znaleźć rozwiązanie"),
-        ("invent", "wynaleźć"),
-        ("make a discovery", "dokonać odkrycia"),
-        ("printing press", "prasa drukarska"),
-        ("wheel", "koło"),
-        ("switch on", "włączyć"),
-        ("switch off", "wyłączyć"),
-        ("text", "napisać wiadomość"),
-        ("turn down", "ściszyć"),
-        ("turn up", "podgłośnić"),
-        ("upload", "przesłać"),
-        ("video", "wideo"),
-        ("webcam", "kamera internetowa"),
-        ("website", "strona internetowa"),
-        ("technology", "technologia"),
-        ("discover", "odkryć"),
-        ("research", "badania"),
-        ("invention", "wynalazek"),
-        ("experiment", "eksperyment")
-    ],
-    "pp. 56–57": [
-        ("brother", "brat"),
-        ("brother-in-law", "szwagier"),
-        ("daughter", "córka"),
-        ("father", "ojciec"),
-        ("father-in-law", "teść"),
-        ("granddaughter", "wnuczka"),
-        ("grandfather", "dziadek"),
-        ("grandmother", "babcia"),
-        ("grandson", "wnuk"),
-        ("mother", "matka"),
-        ("mother-in-law", "teściowa"),
-        ("parents", "rodzice"),
-        ("sister", "siostra"),
-        ("sister-in-law", "szwagierka"),
-        ("son", "syn"),
-        ("step-mother", "macocha"),
-        ("step-sister", "przyrodnia siostra"),
-        ("wife", "żona"),
-        ("husband", "mąż"),
-        ("uncle", "wujek"),
-        ("aunt", "ciocia"),
-        ("nephew", "bratanek"),
-        ("niece", "bratanica"),
-        ("baby", "niemowlę"),
-        ("child", "dziecko"),
-        ("teenager", "nastolatek"),
-        ("adult", "dorosły"),
-        ("grow up", "dorastać"),
-        ("get married", "pobrać się"),
-        ("be born", "urodzić się"),
-        ("retire", "przejść na emeryturę"),
-        ("get divorced", "rozwieść się"),
-        ("get engaged", "zaręczyć się"),
-        ("be single", "być singlem"),
-        ("raise", "wychowywać")
-    ]
-};
+      ]
+      // Możesz dodać więcej kategorii, jeśli chcesz
+    };
 
-let currentSet = [];
-let currentIndex = 0;
-let score = 0;
+    let currentSet = [];
+    let currentIndex = 0;
+    let score = 0;
 
-function selectSet(setName) {
-  currentSet = wordSets[setName];
-  currentIndex = 0;
-  score = 0;
-  document.getElementById("menu").style.display = "none";
-  document.getElementById("game").style.display = "block";
-  showNextWord();
-}
-
-function backToMenu() {
-  document.getElementById("menu").style.display = "block";
-  document.getElementById("game").style.display = "none";
-}
-
-function showNextWord() {
-  if (currentIndex >= currentSet.length) {
-    document.getElementById("question").textContent = `Koniec gry! Twój wynik: ${score}/${currentSet.length}`;
-    document.getElementById("answers").innerHTML = '';
-    return;
-  }
-
-  const currentQuestion = currentSet[currentIndex];
-  document.getElementById("question").textContent = currentQuestion[0];
-
-  const options = [currentQuestion[1]];
-
-  // Zbieramy odpowiedzi z różnych kategorii
-  while (options.length < 5) {
-    const randomSet = wordSets[Object.keys(wordSets)[Math.floor(Math.random() * Object.keys(wordSets).length)]];
-    const randomQuestion = randomSet[Math.floor(Math.random() * randomSet.length)][1];
-    if (!options.includes(randomQuestion)) {
-      options.push(randomQuestion);
+    function selectSet(setName) {
+      currentSet = wordSets[setName];
+      currentIndex = 0;
+      score = 0;
+      document.getElementById("menu").style.display = "none";
+      document.getElementById("game").style.display = "block";
+      showNextWord();
     }
-  }
 
-  shuffle(options);
+    function backToMenu() {
+      document.getElementById("menu").style.display = "block";
+      document.getElementById("game").style.display = "none";
+    }
 
-  document.getElementById("answers").innerHTML = '';
-  options.forEach(opt => {
-    const btn = document.createElement("button");
-    btn.className = "answer-button";
-    btn.textContent = opt;
-    btn.onclick = () => checkAnswer(opt);
-    document.getElementById("answers").appendChild(btn);
-  });
+    function showNextWord() {
+      if (currentIndex >= currentSet.length) {
+        document.getElementById("question").textContent = `Koniec gry! Twój wynik: ${score}/${currentSet.length}`;
+        document.getElementById("answers").innerHTML = '';
+        return;
+      }
 
-  document.getElementById("result").textContent = '';
-  currentIndex++;
-}
+      const currentQuestion = currentSet[currentIndex];
+      document.getElementById("question").textContent = currentQuestion[0];
 
-function shuffle(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-}
+      const options = [currentQuestion[1]];
 
-function checkAnswer(selectedAnswer) {
-  const currentQuestion = currentSet[currentIndex - 1];
-  if (selectedAnswer === currentQuestion[1]) {
-    score++;
-    document.getElementById("result").textContent = "Dobra odpowiedź!";
-  } else {
-    document.getElementById("result").textContent = "Zła odpowiedź!";
-  }
-  setTimeout(showNextWord, 1000);
-}
+      // Zbieramy odpowiedzi z różnych kategorii
+      while (options.length < 5) {
+        const randomSet = wordSets[Object.keys(wordSets)[Math.floor(Math.random() * Object.keys(wordSets).length)]];
+        const randomQuestion = randomSet[Math.floor(Math.random() * randomSet.length)][1];
+        if (!options.includes(randomQuestion)) {
+          options.push(randomQuestion);
+        }
+      }
 
-// Wyświetl menu wyboru zestawów
-function displayMenu() {
-  const menu = document.getElementById("menu");
-  menu.innerHTML = '<h2>Wybierz kategorię:</h2>';
-  Object.keys(wordSets).forEach(setName => {
-    const button = document.createElement("button");
-    button.className = "button";
-    button.textContent = setName;
-    button.onclick = () => selectSet(setName);
-    menu.appendChild(button);
-  });
-}
+      shuffle(options);
 
-displayMenu();
-</script>
+      document.getElementById("answers").innerHTML = '';
+      options.forEach(opt => {
+        const btn = document.createElement("button");
+        btn.className = "answer-button";
+        btn.textContent = opt;
+        btn.onclick = () => checkAnswer(opt);
+        document.getElementById("answers").appendChild(btn);
+      });
+
+      document.getElementById("result").textContent = '';
+      currentIndex++;
+    }
+
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+    }
+
+    function checkAnswer(selectedAnswer) {
+      const currentQuestion = currentSet[currentIndex - 1];
+      if (selectedAnswer === currentQuestion[1]) {
+        score++;
+        document.getElementById("result").textContent = "Dobra odpowiedź!";
+      } else {
+        document.getElementById("result").textContent = "Zła odpowiedź!";
+      }
+      setTimeout(showNextWord, 1000);
+    }
+
+    // Wyświetl menu wyboru zestawów
+    function displayMenu() {
+      const menu = document.getElementById("menu");
+      menu.innerHTML = '<h2>Wybierz kategorię:</h2>';
+      Object.keys(wordSets).forEach(setName => {
+        const button = document.createElement("button");
+        button.className = "button";
+        button.textContent = setName;
+        button.onclick = () => selectSet(setName);
+        menu.appendChild(button);
+      });
+    }
+
+    displayMenu();
+  </script>
 
 </body>
 </html>
